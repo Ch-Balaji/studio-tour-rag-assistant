@@ -1,0 +1,202 @@
+[
+  {
+    "query": "Who is Harry Potter's best friend?",
+    "timestamp": "2025-10-17T16:12:17.526541",
+    "config": {
+      "top_k": 10,
+      "top_n": 5,
+      "llm_model": "llama-3.1-8b-instant"
+    },
+    "query_enhancement": {
+      "original_query": "Who is Harry Potter's best friend?",
+      "enhanced_query": "Who is Harry Potter's best friend?",
+      "time_seconds": 0.0004
+    },
+    "retrieval": {
+      "total_time_seconds": 0.0458,
+      "breakdown": {
+        "query_embedding": 0.0358,
+        "dense_retrieval": 0.0103,
+        "sparse_retrieval": 0.0201,
+        "rrf_fusion": 0.0,
+        "reranking": 0.1394
+      },
+      "chunks_retrieved": 5
+    },
+    "context_formatting": {
+      "time_seconds": 0.0,
+      "context_length_chars": 2986
+    },
+    "llm_generation": {
+      "total_time_seconds": 0.4515,
+      "time_to_first_token_seconds": 0.308,
+      "tokens_generated": 38,
+      "model": "llama-3.1-8b-instant"
+    },
+    "total_pipeline": {
+      "time_seconds": 0.7036,
+      "time_milliseconds": 703.63
+    },
+    "response_preview": "Harry Potter's best friends are Ron Weasley and Hermione Granger. This is evident from the context provided, particularly in Source 3, where Hermione is mentioned as being part of the group of friends..."
+  },
+  {
+    "query": "What is the Patronus charm and how does it work?",
+    "timestamp": "2025-10-17T16:12:19.234806",
+    "config": {
+      "top_k": 10,
+      "top_n": 5,
+      "llm_model": "llama-3.1-8b-instant"
+    },
+    "query_enhancement": {
+      "original_query": "What is the Patronus charm and how does it work?",
+      "enhanced_query": "What is the Patronus charm and how does it work?",
+      "time_seconds": 0.0005
+    },
+    "retrieval": {
+      "total_time_seconds": 0.0525,
+      "breakdown": {
+        "query_embedding": 0.0316,
+        "dense_retrieval": 0.0065,
+        "sparse_retrieval": 0.0303,
+        "rrf_fusion": 0.0,
+        "reranking": 0.2143
+      },
+      "chunks_retrieved": 5
+    },
+    "context_formatting": {
+      "time_seconds": 0.0,
+      "context_length_chars": 3206
+    },
+    "llm_generation": {
+      "total_time_seconds": 0.5087,
+      "time_to_first_token_seconds": 0.1912,
+      "tokens_generated": 123,
+      "model": "llama-3.1-8b-instant"
+    },
+    "total_pipeline": {
+      "time_seconds": 0.8451,
+      "time_milliseconds": 845.05
+    },
+    "response_preview": "The Patronus Charm is a highly advanced magic spell, well beyond ordinary Wizarding Level, that conjures up a Patronus, a kind of anti-dementor, which acts as a shield between the caster and the demen..."
+  },
+  {
+    "query": "Describe the Battle of Hogwarts",
+    "timestamp": "2025-10-17T16:12:21.085206",
+    "config": {
+      "top_k": 10,
+      "top_n": 5,
+      "llm_model": "llama-3.1-8b-instant"
+    },
+    "query_enhancement": {
+      "original_query": "Describe the Battle of Hogwarts",
+      "enhanced_query": "Describe the Battle of Hogwarts",
+      "time_seconds": 0.0003
+    },
+    "retrieval": {
+      "total_time_seconds": 0.0468,
+      "breakdown": {
+        "query_embedding": 0.0199,
+        "dense_retrieval": 0.0052,
+        "sparse_retrieval": 0.0151,
+        "rrf_fusion": 0.0,
+        "reranking": 0.1792
+      },
+      "chunks_retrieved": 5
+    },
+    "context_formatting": {
+      "time_seconds": 0.0,
+      "context_length_chars": 4164
+    },
+    "llm_generation": {
+      "total_time_seconds": 1.0013,
+      "time_to_first_token_seconds": 0.2007,
+      "tokens_generated": 304,
+      "model": "llama-3.1-8b-instant"
+    },
+    "total_pipeline": {
+      "time_seconds": 1.2684,
+      "time_milliseconds": 1268.44
+    },
+    "response_preview": "The Battle of Hogwarts was a pivotal and intense conflict that took place in the Harry Potter series. It was a culmination of the Dark Lord Voldemort's final assault on Hogwarts School of Witchcraft a..."
+  },
+  {
+    "query": "What are the Deathly Hallows?",
+    "timestamp": "2025-10-17T16:12:23.355243",
+    "config": {
+      "top_k": 10,
+      "top_n": 5,
+      "llm_model": "llama-3.1-8b-instant"
+    },
+    "query_enhancement": {
+      "original_query": "What are the Deathly Hallows?",
+      "enhanced_query": "What are the Deathly Hallows?",
+      "time_seconds": 0.0003
+    },
+    "retrieval": {
+      "total_time_seconds": 0.0528,
+      "breakdown": {
+        "query_embedding": 0.0179,
+        "dense_retrieval": 0.0058,
+        "sparse_retrieval": 0.015,
+        "rrf_fusion": 0.0,
+        "reranking": 0.0913
+      },
+      "chunks_retrieved": 5
+    },
+    "context_formatting": {
+      "time_seconds": 0.0,
+      "context_length_chars": 2891
+    },
+    "llm_generation": {
+      "total_time_seconds": 0.3998,
+      "time_to_first_token_seconds": 0.1635,
+      "tokens_generated": 82,
+      "model": "llama-3.1-8b-instant"
+    },
+    "total_pipeline": {
+      "time_seconds": 0.5834,
+      "time_milliseconds": 583.43
+    },
+    "response_preview": "According to Xenophilius Lovegood in \"Harry Potter and the Deathly Hallows\" (Source 2: Page 418), the Deathly Hallows are \"three objects, or Hallows, which, if united, will make the possessor master o..."
+  },
+  {
+    "query": "Tell me about Severus Snape's role in the story",
+    "timestamp": "2025-10-17T16:12:24.943939",
+    "config": {
+      "top_k": 10,
+      "top_n": 5,
+      "llm_model": "llama-3.1-8b-instant"
+    },
+    "query_enhancement": {
+      "original_query": "Tell me about Severus Snape's role in the story",
+      "enhanced_query": "Tell me about Severus Snape's role in the story",
+      "time_seconds": 0.0005
+    },
+    "retrieval": {
+      "total_time_seconds": 0.0526,
+      "breakdown": {
+        "query_embedding": 0.025,
+        "dense_retrieval": 0.0066,
+        "sparse_retrieval": 0.0205,
+        "rrf_fusion": 0.0,
+        "reranking": 0.1721
+      },
+      "chunks_retrieved": 5
+    },
+    "context_formatting": {
+      "time_seconds": 0.0,
+      "context_length_chars": 4177
+    },
+    "llm_generation": {
+      "total_time_seconds": 0.9934,
+      "time_to_first_token_seconds": 0.2039,
+      "tokens_generated": 326,
+      "model": "llama-3.1-8b-instant"
+    },
+    "total_pipeline": {
+      "time_seconds": 1.271,
+      "time_milliseconds": 1271.0
+    },
+    "response_preview": "Severus Snape plays a complex and multifaceted role in the Harry Potter series. Initially, his character is portrayed as a cruel, sarcastic, and disliked teacher who seems to take pleasure in making h..."
+  }
+]

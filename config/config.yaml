@@ -1,0 +1,66 @@
+# Vector Database Configuration
+vector_db:
+  type: "chromadb"
+  persist_directory: "./chroma_db"
+  collection_name: "silverlight_studios_rag"
+
+# Embedding Model Configuration
+embeddings:
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  batch_size: 32
+  device: "cpu"  # Change to "cuda" if GPU available
+
+# Chunking Configuration
+chunking:
+  fixed:
+    chunk_size: 512
+    chunk_overlap: 50
+  recursive:
+    chunk_size: 512
+    chunk_overlap: 50
+    separators: ["\n\n", "\n", " ", ""]
+  semantic:
+    buffer_size: 1
+    breakpoint_threshold: 0.5
+  hybrid:
+    min_size: 256
+    max_size: 768
+    chunk_overlap: 50
+
+# Retrieval Configuration
+retrieval:
+  initial_top_k: 25
+  final_top_n: 5
+  similarity_threshold: 0.3
+  use_reranking: true
+  reranker_model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+
+# LLM Configuration
+llm:
+  provider: "ollama"
+  model_name: "llama3.1"
+  base_url: "http://localhost:11434"
+  temperature: 0.7
+  max_tokens: 2048
+  streaming: true
+  citation_style: "clean"  # Options: "clean", "inline", "none"
+
+# Memory Configuration
+memory:
+  type: "buffer_window"
+  k: 5  # Keep last 5 conversation turns
+
+# Application Configuration
+app:
+  title: "Silverlight Studios RAG Chatbot"
+  page_icon: "⚡"
+  layout: "wide"
+  port: 8501  # Port for Streamlit server
+
+# ngrok Configuration (for global access)
+ngrok:
+  enabled: false  # Set to true when using ngrok tunneling
+  port: 8501  # Port to tunnel (should match app.port)
+  # auth_token: ""  # Optional: Add your ngrok auth token here for better features
+  # region: "us"  # Optional: ngrok region (us, eu, ap, au, sa, jp, in)
+

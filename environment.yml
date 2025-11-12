@@ -1,0 +1,35 @@
+name: hp_rag_voice
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - fastapi
+    - uvicorn[standard]
+    - websockets
+    - python-multipart
+    - openai-whisper
+    - ffmpeg-python
+    - pydub
+    - langchain
+    - langchain-community
+    - langchain-ollama
+    - langchain-text-splitters
+    - chromadb
+    - sentence-transformers
+    - torch
+    - transformers
+    - pypdf
+    - PyMuPDF
+    - streamlit
+    - pydantic
+    - pydantic-settings
+    - python-dotenv
+    - PyYAML
+    - ollama
+    - numpy
+    - tqdm
+    - rank-bm25
+

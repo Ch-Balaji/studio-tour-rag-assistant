@@ -1,0 +1,49 @@
+# Core FastAPI and Server Dependencies
+fastapi
+uvicorn[standard]
+websockets
+python-multipart
+
+# Audio Processing & Speech Recognition
+openai-whisper
+ffmpeg-python
+pydub
+soundfile
+scipy
+
+# Text-to-Speech
+TTS
+
+# LLM & Embeddings  
+langchain
+langchain-community
+langchain-ollama
+langchain-text-splitters
+groq
+ollama
+
+# Vector Store & Retrieval
+chromadb
+sentence-transformers
+rank-bm25
+
+# Machine Learning
+torch
+transformers
+numpy
+
+# Document Processing
+pypdf
+PyMuPDF
+
+# Configuration & Environment
+python-dotenv
+pydantic
+pydantic-settings
+PyYAML
+
+# Web Interface
+streamlit
+
+# Utilities
+tqdm
