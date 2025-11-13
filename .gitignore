@@ -136,6 +136,9 @@ backend/**/__pycache__/
 # Scripts to exclude
 start_with_groq.sh
 
+# Architecture diagrams
+architecture_diagrams/
+
 # Node.js
 node_modules/
 jspm_packages/
