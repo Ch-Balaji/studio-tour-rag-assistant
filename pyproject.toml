@@ -1,0 +1,132 @@
+[tool.poetry]
+name = "ff918-rag-voice-chat"
+version = "1.0.0"
+description = "RAG Voice Chat System with Groq/Ollama for Warner Bros Discovery Hackathon"
+authors = ["WBD Team"]
+readme = "README.md"
+license = "Proprietary"
+packages = [{include = "backend"}, {include = "src"}, {include = "scripts"}]
+
+[tool.poetry.scripts]
+# Backend commands
+start-backend = "backend.run:main"
+ingest-data = "scripts.ingest_data:main"
+
+# Health check
+health-check = "backend.main:health_check"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+
+# Web Framework & API
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+websockets = "^12.0"
+python-multipart = "^0.0.6"
+
+# Audio Processing (Speech-to-Text only, no TTS)
+openai-whisper = "^20231117"
+ffmpeg-python = "^0.2.0"
+pydub = "^0.25.1"
+soundfile = "^0.12.1"
+scipy = "^1.11.4"
+
+# LangChain & RAG
+langchain = "^0.3.0"
+langchain-community = "^0.3.0"
+langchain-ollama = "^0.3.0"
+langchain-text-splitters = "^0.3.0"
+groq = "^0.11.0"
+langsmith = "^0.2.0"
+
+# Vector Database & Embeddings
+chromadb = "^0.4.18"
+sentence-transformers = "^2.2.2"
+
+# ML/AI Framework  
+torch = {version = "^2.1.0", markers = "sys_platform != 'linux'"}
+transformers = "^4.35.0"
+
+# PDF Processing
+pypdf = "^3.17.0"
+pymupdf = "^1.23.0"
+
+# Configuration & Utilities
+pydantic = "^2.0.0"
+pydantic-settings = "^2.1.0"
+python-dotenv = "^1.0.0"
+pyyaml = "^6.0"
+
+# Ollama Client
+ollama = "^0.5.3"
+
+# Search & Retrieval
+rank-bm25 = "^0.2.2"
+
+# Utilities
+numpy = "^1.24.0"
+tqdm = "^4.66.0"
+
+[tool.poetry.group.dev.dependencies]
+# Testing
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+pytest-asyncio = "^0.21.0"
+
+# Code quality
+black = "^23.10.0"
+ruff = "^0.1.0"
+mypy = "^1.6.0"
+isort = "^5.12.0"
+
+# Development tools
+ipython = "^8.12.0"
+jupyter = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --cov=backend --cov=src --cov-report=html --cov-report=term"
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+
+[tool.coverage.run]
+source = ["backend", "src"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+

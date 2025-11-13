@@ -9,8 +9,8 @@ echo ""
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$SCRIPT_DIR"
 
-# Get conda base
-CONDA_BASE=$(conda info --base)
+# Set environment variables
+export OLLAMA_BASE_URL="http://localhost:11434"
 
 # Create logs directory if it doesn't exist
 mkdir -p "$PROJECT_ROOT/logs"
@@ -18,11 +18,10 @@ mkdir -p "$PROJECT_ROOT/logs"
 # Start backend with Ollama
 echo "✅ Starting backend with local Ollama..."
 (
-    source "$CONDA_BASE/etc/profile.d/conda.sh"
-    conda activate hp_rag_voice
     cd "$PROJECT_ROOT"
     export LLM_PROVIDER=ollama
-    python backend/run.py
+    export OLLAMA_BASE_URL="$OLLAMA_BASE_URL"
+    poetry run python backend/run.py 2>&1 | tee logs/backend.log
 ) &
 BACKEND_PID=$!
 echo "Backend PID: $BACKEND_PID"
@@ -35,7 +34,7 @@ echo ""
 echo "✅ Starting frontend..."
 (
     cd "$PROJECT_ROOT/frontend"
-    npm run dev
+    npm run dev 2>&1 | tee ../logs/frontend.log
 ) &
 FRONTEND_PID=$!
 echo "Frontend PID: $FRONTEND_PID"

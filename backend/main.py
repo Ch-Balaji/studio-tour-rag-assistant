@@ -18,13 +18,10 @@ from backend.models.schemas import (
     SettingsResponse,
     VoiceSampleRequest,
     VoiceSampleResponse,
-    TTSRequest,
-    TTSResponse,
     VoiceStatusResponse
 )
 from backend.services.transcription_service import TranscriptionService
 from backend.services.rag_service import RAGService
-from backend.services.tts_service import TTSService
 
 # Configure logging
 logging.basicConfig(
@@ -52,7 +49,6 @@ app.add_middleware(
 # Initialize services
 transcription_service: TranscriptionService = None
 rag_service: RAGService = None
-tts_service: TTSService = None
 
 # WebSocket connection manager
 class ConnectionManager:
@@ -82,7 +78,7 @@ manager = ConnectionManager()
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup"""
-    global transcription_service, rag_service, tts_service
+    global transcription_service, rag_service
     
     try:
         logger.info("Initializing services...")
@@ -92,15 +88,6 @@ async def startup_event():
         
         # Initialize RAG service
         rag_service = RAGService(config)
-        
-        # Initialize TTS service
-        try:
-            tts_service = TTSService()
-            logger.info("TTS service initialized successfully")
-        except Exception as tts_error:
-            logger.warning(f"TTS service initialization failed: {tts_error}")
-            logger.warning("TTS features will be disabled")
-            tts_service = None
         
         logger.info("All services initialized successfully")
     except Exception as e:
@@ -230,103 +217,6 @@ async def chat(request: ChatRequest):
     except Exception as e:
         logger.error(f"Chat error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/api/tts/upload-voice", response_model=VoiceSampleResponse)
-async def upload_voice_sample(request: VoiceSampleRequest):
-    """Upload voice sample for cloning"""
-    try:
-        if tts_service is None:
-            return VoiceSampleResponse(
-                success=False,
-                message="TTS service not available",
-                error="TTS service failed to initialize"
-            )
-        
-        success = tts_service.store_voice_sample(
-            audio_data=request.audio,
-            session_id=request.session_id,
-            audio_format=request.format
-        )
-        
-        if success:
-            return VoiceSampleResponse(
-                success=True,
-                message=f"Voice sample stored successfully for session {request.session_id}"
-            )
-        else:
-            return VoiceSampleResponse(
-                success=False,
-                message="Failed to store voice sample",
-                error="Unknown error occurred"
-            )
-    
-    except Exception as e:
-        logger.error(f"Error uploading voice sample: {e}")
-        return VoiceSampleResponse(
-            success=False,
-            message="Failed to store voice sample",
-            error=str(e)
-        )
-
-
-@app.post("/api/tts/generate", response_model=TTSResponse)
-async def generate_speech(request: TTSRequest):
-    """Generate speech from text using voice cloning"""
-    try:
-        if tts_service is None:
-            return TTSResponse(
-                success=False,
-                error="TTS service not available"
-            )
-        
-        audio_base64 = tts_service.generate_speech(
-            text=request.text,
-            session_id=request.session_id,
-            language=request.language
-        )
-        
-        if audio_base64:
-            return TTSResponse(
-                audio=audio_base64,
-                success=True
-            )
-        else:
-            return TTSResponse(
-                success=False,
-                error="Failed to generate speech"
-            )
-    
-    except Exception as e:
-        logger.error(f"Error generating speech: {e}")
-        return TTSResponse(
-            success=False,
-            error=str(e)
-        )
-
-
-@app.get("/api/tts/has-voice/{session_id}", response_model=VoiceStatusResponse)
-async def check_voice_status(session_id: str):
-    """Check if session has voice sample"""
-    try:
-        if tts_service is None:
-            return VoiceStatusResponse(
-                has_voice=False,
-                session_id=session_id
-            )
-        
-        has_voice = tts_service.has_voice_sample(session_id)
-        return VoiceStatusResponse(
-            has_voice=has_voice,
-            session_id=session_id
-        )
-    
-    except Exception as e:
-        logger.error(f"Error checking voice status: {e}")
-        return VoiceStatusResponse(
-            has_voice=False,
-            session_id=session_id
-        )
 
 
 @app.websocket("/ws/chat")

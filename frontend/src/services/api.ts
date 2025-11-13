@@ -60,7 +60,8 @@ export async function checkHealth(): Promise<HealthStatus> {
     console.error('Health check error:', error);
     return {
       status: 'unhealthy',
-      ollama_connected: false,
+      llm_connected: false,
+      llm_provider: 'unknown',
       services_loaded: false,
     };
   }

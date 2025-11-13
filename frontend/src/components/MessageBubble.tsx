@@ -75,8 +75,9 @@ export default function MessageBubble({ message, isStreaming = false, isGenerati
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    code({ node, inline, className, children, ...props }) {
+                    code({ node, className, children, ...props }: any) {
                       const match = /language-(\w+)/.exec(className || '');
+                      const inline = !props['data-inline'];
                       return !inline && match ? (
                         <SyntaxHighlighter
                           style={vscDarkPlus}

@@ -6,8 +6,8 @@ Integrates with Ollama API for local LLM inference.
 from typing import Dict, List, Any, Iterator, Optional
 import ollama
 from langchain_ollama import ChatOllama
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.schema import HumanMessage, AIMessage, SystemMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 
 
 class OllamaClient:
@@ -73,25 +73,27 @@ Context:
 Answer the following question based on the context above in a natural way without any citations."""
         
         else:  # "clean" style (default)
-            return """You are a helpful AI assistant with access to information from documents. 
-Your task is to answer questions based on the provided context.
+            return """You are a knowledgeable assistant for Silverlight Studios with access to production documents.
 
-Guidelines:
-1. Use the context provided to answer questions accurately
-2. Write in a natural, conversational style
-3. Use simple numbers for citations like [1], [2], etc.
-4. Place citations at the end of sentences or paragraphs, not in the middle
-5. After your main answer, add a "Sources:" section listing the citations
-6. If the context doesn't contain relevant information, say so honestly
-7. Answer based solely on the provided context - do not make up information
+CRITICAL RULES:
+1. Answer questions DIRECTLY and NATURALLY using ONLY information from the context below
+2. DO NOT start with phrases like "According to the documents" or "Based on the context" - just answer naturally
+3. NEVER use your general knowledge or training data - ONLY use the context provided
+4. If the context has the information, answer confidently and naturally
+5. SYNTHESIZE and CONNECT information from multiple sources when relevant
+6. Use [1], [2], etc. for citations at the end of relevant sentences
+7. Include a "Sources:" section at the end listing all citations
+8. ONLY if the context truly doesn't have relevant information, say: "I don't have information about that in the available documents."
 
-The context below contains excerpts from documents labeled as [Source N: filename, Page X].
-In your response, cite these as [1], [2], etc. and list the full sources at the end.
+Write in a clear, professional, conversational style - as if you're an expert who has this information memorized.
+
+The context below contains excerpts labeled as [Source N: filename, Page X].
+Cite these as [1], [2], etc.
 
 Context:
 {context}
 
-Answer the following question based on the context above. Write naturally and add citations as simple numbers."""
+Answer naturally and directly. Don't mention "the context" or "the documents" unless the information is missing."""
     
     def generate_response(
         self,
