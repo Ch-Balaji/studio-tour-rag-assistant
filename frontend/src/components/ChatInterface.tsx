@@ -380,7 +380,7 @@ export default function ChatInterface() {
             <span className="text-xs text-foreground-muted whitespace-nowrap">
               {isConnected
                 ? isHealthy
-                  ? `Connected (${llmProvider.toUpperCase()})`
+                  ? llmProvider === 'groq' ? 'Connected' : `Connected (${llmProvider.toUpperCase()})`
                   : `${llmProvider === 'groq' ? 'Groq API' : 'LLM'} Disconnected`
                 : 'Connecting...'}
             </span>

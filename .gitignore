@@ -134,7 +134,7 @@ backend/__pycache__/
 backend/**/__pycache__/
 
 # Scripts to exclude
-start_with_groq.sh
+# start_with_groq.sh (temporarily commented for backup branch)
 
 # Architecture diagrams
 architecture_diagrams/
