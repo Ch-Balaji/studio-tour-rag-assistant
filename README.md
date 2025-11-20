@@ -1,5 +1,12 @@
 # Studio Tours AI Assistant - Voice-Enabled RAG System
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-green)](https://ollama.ai)
+
 ## 🎬 Overview
 
 An intelligent AI assistant designed to support **studio tours and visitor experiences** by providing instant, accurate answers about tour operations, facilities, production history, and interactive experiences. Built with 100% open-source models and local inference for complete data privacy.
@@ -21,6 +28,18 @@ An intelligent AI assistant designed to support **studio tours and visitor exper
 - **Training**: New staff onboarding with interactive Q&A
 - **Operations**: Access production history and technical specifications
 - **Multi-lingual Support**: Serve international visitors in their language
+
+## 🏗️ Architecture
+
+![System Architecture](documentation/architecture_mermaid_enhanced.png)
+
+The system uses a sophisticated **Hybrid RAG (Retrieval-Augmented Generation)** architecture combining:
+- **Vector Search** (ChromaDB + Sentence Transformers) for semantic understanding
+- **Keyword Search** (BM25) for exact term matching
+- **Cross-Encoder Reranking** for improved accuracy
+- **Streaming LLM** (Ollama) for real-time response generation
+
+See the [documentation folder](documentation/) for detailed architecture diagrams and technical documentation.
 
 ## Prerequisites
 
@@ -422,15 +441,6 @@ studio-tour-rag-assistant/
 - **Knowledge Base**: 2000+ document chunks indexed
 - **Accuracy**: High relevance through hybrid search + reranking
 
-## Support
-
-If you encounter issues:
-1. Check the `logs/` directory for detailed error messages
-2. Verify Ollama is running: `ollama list`
-3. Ensure ports 3000 and 8000 are available
-4. Check Poetry environment: `poetry env info`
-5. Review configuration in `config/config.yaml`
-
 ## 📝 Notes
 
 - **First run** will download models (~5-7GB total):
@@ -442,3 +452,41 @@ If you encounter issues:
 - **Fully offline** after initial setup - no internet required
 - **Privacy-first** - All processing happens on your machine
 - **Extensible** - Easy to add new documents to knowledge base
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+- 🐛 Report bugs by opening an issue
+- 💡 Suggest new features or improvements
+- 🔧 Submit pull requests
+- 📖 Improve documentation
+- ⭐ Star the repository if you find it useful!
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+Built with amazing open-source projects:
+- [Ollama](https://ollama.ai) - Local LLM inference
+- [FastAPI](https://fastapi.tiangolo.com/) - Modern Python web framework
+- [Next.js](https://nextjs.org/) - React framework
+- [ChromaDB](https://www.trychroma.com/) - Vector database
+- [Whisper](https://github.com/openai/whisper) - Speech recognition
+- [Sentence Transformers](https://www.sbert.net/) - Embeddings
+- [LangChain](https://www.langchain.com/) - LLM framework
+
+## 💬 Support
+
+If you encounter issues:
+1. Check the `logs/` directory for detailed error messages
+2. Verify Ollama is running: `ollama list`
+3. Ensure ports 3000 and 8000 are available
+4. Check Poetry environment: `poetry env info`
+5. Review configuration in `config/config.yaml`
+6. Open an issue on GitHub for help
+
+---
+
+**Made with ❤️ using 100% open-source technologies**
