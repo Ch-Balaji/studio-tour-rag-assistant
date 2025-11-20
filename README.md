@@ -1,36 +1,8 @@
-# Flash Forward: AI/ML Hackathon 2025 (FF918)
-
-Thank you for participating in this year's hackathon!
-
-# Support
-
-If you need support during the Hackathon, please use one of the following methods:
-
-- [Support Website](https://hackathon.wbd.com/ct/a.php?c=CD8952D9-7242-11F0-A012-0ED5C2D8E0FF)
-- [Support Slack Channel (#2025-flashforward-hackathon)](https://warnermedia.enterprise.slack.com/archives/C09ES3YDCTY) 
-
-# Security Guidelines
-
-Please review the [Hackathon Application Security Guidelines](https://hackathon.wbd.com/FF1102) before contributing and ensure your code follows Hackathon guidelines.
-
-# License
-
-Any code in this this repository, that is developed by WBD employees, is covered by the proprietary [WBDHL license](./LICENSE) and is not intended for public release.
-
-> [!NOTE]
-> This repository will be archived after the hackathon.
-
----
-
-**WBD-FlashForward-Hackathon-2025**
-
----
-
 # Studio Tours AI Assistant - Voice-Enabled RAG System
 
 ## 🎬 Overview
 
-An intelligent AI assistant designed to support **Warner Bros Studio Tours** by providing instant, accurate answers about tour operations, facilities, production history, and visitor experiences. Built with 100% open-source models and local inference for complete data privacy.
+An intelligent AI assistant designed to support **studio tours and visitor experiences** by providing instant, accurate answers about tour operations, facilities, production history, and interactive experiences. Built with 100% open-source models and local inference for complete data privacy.
 
 ### ✨ Key Features
 
@@ -68,8 +40,8 @@ Before starting, ensure you have:
 
 ```bash
 # Clone the repository
-git clone https://github.com/WarnerBrosDiscovery/FF918.git
-cd FF918
+git clone https://github.com/Ch-Balaji/studio-tour-rag-assistant.git
+cd studio-tour-rag-assistant
 ```
 
 ### 2. Set Up Python Environment with Poetry
@@ -161,13 +133,15 @@ poetry run python scripts/ingest_data.py --data-dir data/pdfs --chunking-strateg
 # - Build BM25 index for keyword search (hybrid retrieval)
 ```
 
-**Included Knowledge Base:**
+**Included Knowledge Base (Sample Data):**
 - Comprehensive Tour Guides and FAQs
 - Studio Facilities and Technical Specifications
 - Production History Database
 - Interactive Experiences Guide
 - Backlot Environments Details
 - Special Effects and Production Techniques
+
+> **Note:** The included PDFs contain sample/generated data for demonstration purposes.
 
 ### 7. Run the Application
 
@@ -347,7 +321,7 @@ lsof -i :8000  # Should be empty
 
 ## 🏗️ Project Structure
 ```
-FF918/
+studio-tour-rag-assistant/
 ├── backend/                    # FastAPI backend
 │   ├── main.py                # API endpoints and WebSocket handlers
 │   ├── config.py              # Configuration management

@@ -1,0 +1,328 @@
+================================================================================
+MERMAID ARCHITECTURE DIAGRAMS - GUIDE
+================================================================================
+
+This guide describes the Mermaid-based architecture diagrams created for
+your PowerPoint presentation.
+
+================================================================================
+WHY MERMAID DIAGRAMS?
+================================================================================
+
+✓ Text-based: Easy to version control and modify
+✓ Scalable: SVG format scales perfectly without quality loss
+✓ Editable: Can be edited at https://mermaid.live/ 
+✓ Beautiful: Clean, professional diagrams with consistent styling
+✓ Flexible: Multiple formats (PNG, SVG) for different use cases
+
+================================================================================
+GENERATED DIAGRAMS
+================================================================================
+
+1. ENHANCED ARCHITECTURE (RECOMMENDED FOR PPT)
+   --------------------------------------------
+   Files:
+   - architecture_mermaid_enhanced.png (80 KB, high quality)
+   - architecture_mermaid_enhanced.svg (58 KB, scalable vector)
+   - architecture_enhanced.mmd (source code)
+   
+   Features:
+   - Comprehensive flowchart showing all system layers
+   - Color-coded by component type:
+     * Blue: Frontend Layer
+     * Green: Backend API
+     * Orange: RAG Pipeline
+     * Yellow: Search Components
+     * Purple: Data Storage
+     * Red: Language Model
+     * Gray: Data Ingestion
+   - Shows data flow with arrows
+   - Includes component descriptions
+   - Clean subgraph organization
+   
+   Best for: Technical presentations, architecture reviews
+
+
+2. DETAILED ARCHITECTURE
+   ----------------------
+   Files:
+   - architecture_mermaid_detailed.png (37 KB)
+   - architecture_mermaid_detailed.svg (62 KB)
+   - architecture.mmd (source code)
+   
+   Features:
+   - Graph-based layout with detailed components
+   - Shows RAG pipeline internals (Hybrid Retrieval details)
+   - Includes all connections and relationships
+   - More compact layout
+   
+   Best for: Detailed technical discussions
+
+
+3. SIMPLIFIED ARCHITECTURE
+   ------------------------
+   Files:
+   - architecture_mermaid_simplified.png (46 KB)
+   - architecture_mermaid_simplified.svg (35 KB)
+   
+   Features:
+   - Clean, easy-to-understand flow
+   - Shows main components only
+   - Ideal for quick overview
+   - Less technical details
+   
+   Best for: Executive summaries, non-technical audiences
+
+
+================================================================================
+HOW TO USE IN POWERPOINT
+================================================================================
+
+Method 1: Insert PNG (Simple)
+------------------------------
+1. Insert > Pictures
+2. Select architecture_mermaid_enhanced.png
+3. Resize as needed (maintains quality)
+4. Recommended for most presentations
+
+Method 2: Insert SVG (Best Quality)
+------------------------------------
+1. Insert > Pictures
+2. Select architecture_mermaid_enhanced.svg
+3. Can be scaled infinitely without quality loss
+4. Can be ungrouped and edited in PowerPoint (advanced)
+5. Recommended for professional presentations
+
+Method 3: Edit and Re-render
+-----------------------------
+1. Open architecture_enhanced.mmd in text editor
+2. Make changes to the Mermaid code
+3. Visit https://mermaid.live/
+4. Paste the code
+5. Export as PNG or SVG
+6. Use in your presentation
+
+
+================================================================================
+EDITING MERMAID DIAGRAMS
+================================================================================
+
+The .mmd files contain the source code for the diagrams. You can edit them
+to customize the architecture diagram.
+
+Online Editor:
+--------------
+1. Go to https://mermaid.live/
+2. Copy the contents of any .mmd file
+3. Paste into the editor
+4. Edit the diagram in real-time
+5. Download as PNG or SVG
+
+Common Edits:
+-------------
+- Add a component: 
+  NewComp["🔧 New Component<br/><small>Description</small>"]
+
+- Add connection:
+  ComponentA --> ComponentB
+
+- Change colors:
+  Modify the classDef statements at the bottom
+
+- Change text:
+  Just edit the text within the square brackets
+
+
+================================================================================
+DIAGRAM STRUCTURE EXPLANATION
+================================================================================
+
+Enhanced Diagram Layout:
+------------------------
+
+┌─────────────────────────────────────────────────────────────┐
+│  FRONTEND LAYER (Blue)                                      │
+│  - Chat UI, Voice Recorder, Settings, WebSocket            │
+└───────────────────────┬─────────────────────────────────────┘
+                        │ HTTP/WS
+┌───────────────────────▼─────────────────────────────────────┐
+│  BACKEND API (Green)                                        │
+│  - REST, WebSocket Handler, Transcription, Session Mgr     │
+└───────────────────────┬─────────────────────────────────────┘
+                        │ Query
+┌───────────────────────▼─────────────────────────────────────┐
+│  RAG PIPELINE (Orange)                                      │
+│  ┌────────────────────┐  ┌────────────────────┐           │
+│  │ Query Processing   │  │ Result Ranking     │           │
+│  │ - Enhancer         │→ │ - Cross-Encoder    │           │
+│  │ - Hybrid Search    │  │ - Context Format   │           │
+│  └────────────────────┘  └────────────────────┘           │
+│                                                              │
+│  Memory Manager (Conversation Context)                      │
+└──────────┬────────────────────────┬──────────────────────┬──┘
+           │                        │                      │
+┌──────────▼──────────┐  ┌─────────▼─────────┐  ┌────────▼────────┐
+│ SEARCH COMPONENTS   │  │ DATA STORAGE      │  │ LANGUAGE MODEL  │
+│ (Yellow)            │  │ (Purple)          │  │ (Red)           │
+│ - Vector Search     │  │ - ChromaDB        │  │ - Ollama        │
+│ - BM25 Search       │  │ - BM25 Index      │  │   Llama 3.1 8B  │
+│ - RRF Fusion        │  │                   │  │                 │
+└─────────────────────┘  └───────────────────┘  └─────────────────┘
+
+OFFLINE: Data Ingestion Pipeline (Gray)
+PDFs → Chunking → Embeddings → Vector Store + BM25 Index
+
+
+================================================================================
+COLOR SCHEME REFERENCE
+================================================================================
+
+Frontend Layer:     #E3F2FD (Light Blue) / Border: #1976D2 (Blue)
+Backend API:        #E8F5E9 (Light Green) / Border: #388E3C (Green)
+RAG Pipeline:       #FFF3E0 (Light Orange) / Border: #F57C00 (Orange)
+Search Components:  #FFF9C4 (Light Yellow) / Border: #F9A825 (Amber)
+Data Storage:       #F3E5F5 (Light Purple) / Border: #7B1FA2 (Purple)
+Language Model:     #FFEBEE (Light Red) / Border: #C62828 (Red)
+Data Ingestion:     #ECEFF1 (Light Gray) / Border: #546E7A (Blue Gray)
+
+
+================================================================================
+MERMAID SYNTAX QUICK REFERENCE
+================================================================================
+
+Subgraphs (Containers):
+  subgraph Name["Display Name"]
+    components here
+  end
+
+Nodes (Components):
+  NodeID["Display Text"]
+  NodeID["🔧 With Emoji<br/><small>Subtitle</small>"]
+
+Connections:
+  A --> B          (Arrow)
+  A ==> B          (Thick arrow)
+  A -.-> B         (Dotted arrow)
+  A <-.-> B        (Bidirectional dotted)
+
+Databases:
+  DB[("Database<br/>Name")]
+
+Styling:
+  classDef className fill:#COLOR,stroke:#COLOR,stroke-width:2px
+  class Node1,Node2 className
+
+
+================================================================================
+REGENERATING DIAGRAMS
+================================================================================
+
+If you need to regenerate the diagrams after editing:
+
+Option 1: Online (Easiest)
+  1. Edit the .mmd file
+  2. Go to https://mermaid.live/
+  3. Paste the code
+  4. Download PNG/SVG
+
+Option 2: Command Line (Requires mermaid-cli)
+  npm install -g @mermaid-js/mermaid-cli
+  mmdc -i architecture_enhanced.mmd -o output.png -b white
+
+Option 3: Python Script (Already provided)
+  python render_enhanced.py
+  (Uses mermaid.ink API to render)
+
+
+================================================================================
+ADVANTAGES OVER MATPLOTLIB DIAGRAMS
+================================================================================
+
+✓ Easier to Edit: Text-based, no Python code needed
+✓ Smaller Files: More efficient than rasterized images
+✓ Better Scaling: SVG scales perfectly
+✓ Industry Standard: Mermaid is widely used in documentation
+✓ Version Control: Easy to track changes in Git
+✓ Live Preview: Edit and see changes in real-time online
+✓ Consistent Style: Automatic layout and styling
+
+
+================================================================================
+TIPS FOR POWERPOINT PRESENTATION
+================================================================================
+
+1. Use Enhanced Diagram for Main Architecture Slide
+   - Shows complete system overview
+   - Color-coded for easy understanding
+   - Professional appearance
+
+2. Use Simplified Diagram for Executive Summary
+   - Less overwhelming for non-technical audiences
+   - Focus on main flow
+
+3. Use SVG Format When Possible
+   - Better quality at any size
+   - Can be edited in PowerPoint if needed
+
+4. Add Animations
+   - Reveal layers progressively
+   - Highlight specific components
+   - Show data flow step-by-step
+
+5. Complement with Text
+   - Use the ARCHITECTURE_OVERVIEW.txt for detailed notes
+   - Add speaker notes from the overview document
+   - Reference specific components during presentation
+
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Issue: Diagram doesn't render properly
+Solution: 
+  - Check syntax at https://mermaid.live/
+  - Ensure all subgraph/end pairs match
+  - Verify node IDs are unique
+
+Issue: Colors not showing
+Solution:
+  - Check classDef definitions
+  - Ensure class assignments reference correct nodes
+
+Issue: Layout looks wrong
+Solution:
+  - Try different graph types (TB, LR, etc.)
+  - Adjust subgraph organization
+  - Use direction hints within subgraphs
+
+Issue: Text too small
+Solution:
+  - Edit fontSize in theme variables
+  - Use <small> tags for subtitles
+  - Export at higher resolution
+
+
+================================================================================
+CONTACT & SUPPORT
+================================================================================
+
+Mermaid Documentation: https://mermaid.js.org/
+Mermaid Live Editor: https://mermaid.live/
+Mermaid GitHub: https://github.com/mermaid-js/mermaid
+
+For project-specific questions, refer to:
+- ARCHITECTURE_OVERVIEW.txt (detailed system description)
+- README.txt (documentation index)
+
+
+================================================================================
+END OF MERMAID DIAGRAMS GUIDE
+================================================================================
+
+
+
+
+
+
+

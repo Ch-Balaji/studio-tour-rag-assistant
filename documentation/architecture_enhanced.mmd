@@ -1,0 +1,107 @@
+%%{init: {'theme':'base', 'themeVariables': {'fontSize':'16px'}}}%%
+
+flowchart TB
+    subgraph Frontend["💻 FRONTEND LAYER - Next.js + React"]
+        direction LR
+        UI["🖥️ Chat UI<br/><small>Text Interface</small>"]
+        Voice["🎙️ Voice Recorder<br/><small>Audio Capture</small>"]
+        Settings["⚙️ Settings<br/><small>Config Panel</small>"]
+        WS["🔌 WebSocket<br/><small>Real-time</small>"]
+    end
+
+    subgraph Backend["⚡ BACKEND API - FastAPI"]
+        direction LR
+        REST["📡 REST API<br/><small>HTTP Endpoints</small>"]
+        WSHandler["🔄 WebSocket Handler<br/><small>Streaming</small>"]
+        Transcribe["🎤 Whisper STT<br/><small>Local Speech-to-Text</small>"]
+        SessionMgr["👥 Session Manager<br/><small>User Sessions</small>"]
+    end
+
+    subgraph RAG["🧠 RAG PIPELINE - Core Intelligence"]
+        direction TB
+        
+        subgraph Processing["Query Processing"]
+            Enhance["🔍 Query Enhancer<br/><small>Context Expansion</small>"]
+            Search["🔀 Hybrid Retrieval<br/><small>Vector + Keyword</small>"]
+        end
+        
+        subgraph Ranking["Result Ranking"]
+            Rerank["🎯 Cross-Encoder<br/><small>ms-marco-MiniLM</small>"]
+            Format["📋 Context Formatter<br/><small>With Citations</small>"]
+        end
+        
+        Memory["🧠 Memory Manager<br/><small>Last 5 Turns</small>"]
+    end
+
+    subgraph SearchLayer["🔍 SEARCH COMPONENTS"]
+        direction LR
+        VectorSearch["📊 Vector Search<br/><small>Semantic Similarity</small>"]
+        BM25Search["📝 BM25 Search<br/><small>Keyword Matching</small>"]
+        Fusion["⚡ RRF Fusion<br/><small>Combine Results</small>"]
+    end
+
+    subgraph Storage["💾 DATA STORAGE LAYER"]
+        direction LR
+        ChromaDB[("🗄️ ChromaDB<br/><small>Vector Store<br/>384-dim</small>")]
+        BM25Index[("📚 BM25 Index<br/><small>Keyword Index</small>")]
+    end
+
+    subgraph LLM["🤖 LANGUAGE MODEL"]
+        Ollama["🦙 Ollama<br/><small>Llama 3.1 8B<br/>100% Local</small>"]
+    end
+
+    subgraph Ingestion["📥 DATA INGESTION (Offline)"]
+        direction LR
+        PDFs["📄 PDFs"] --> Chunk["✂️ Chunking"]
+        Chunk --> Embed["🔢 Embeddings"]
+        Embed --> IngestV["💾 Vector Store"]
+        Embed --> IngestB["📇 BM25 Build"]
+    end
+
+    %% Connections
+    Frontend ==>|"HTTP/WS"| Backend
+    Backend ==>|"Query"| Processing
+    
+    Enhance --> Search
+    Search --> VectorSearch
+    Search --> BM25Search
+    VectorSearch --> Fusion
+    BM25Search --> Fusion
+    Fusion --> Rerank
+    
+    VectorSearch <-.->|"Search"| ChromaDB
+    BM25Search <-.->|"Search"| BM25Index
+    
+    Rerank --> Format
+    Format --> Memory
+    Memory ==>|"Context"| Ollama
+    
+    Ollama ==>|"Response"| Backend
+    Backend ==>|"Stream"| Frontend
+    
+    IngestV -.->|"Populate"| ChromaDB
+    IngestB -.->|"Build"| BM25Index
+
+    %% Styling
+    classDef frontendStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:3px,color:#000
+    classDef backendStyle fill:#E8F5E9,stroke:#388E3C,stroke-width:3px,color:#000
+    classDef ragStyle fill:#FFF3E0,stroke:#F57C00,stroke-width:3px,color:#000
+    classDef searchStyle fill:#FFF9C4,stroke:#F9A825,stroke-width:2px,color:#000
+    classDef storageStyle fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px,color:#000
+    classDef llmStyle fill:#FFEBEE,stroke:#C62828,stroke-width:3px,color:#000
+    classDef ingestionStyle fill:#ECEFF1,stroke:#546E7A,stroke-width:2px,color:#000
+
+    class Frontend,UI,Voice,Settings,WS frontendStyle
+    class Backend,REST,WSHandler,Transcribe,SessionMgr backendStyle
+    class RAG,Processing,Ranking,Enhance,Search,Rerank,Format,Memory ragStyle
+    class SearchLayer,VectorSearch,BM25Search,Fusion searchStyle
+    class Storage,ChromaDB,BM25Index storageStyle
+    class LLM,Ollama llmStyle
+    class Ingestion,PDFs,Chunk,Embed,IngestV,IngestB ingestionStyle
+
+
+
+
+
+
+

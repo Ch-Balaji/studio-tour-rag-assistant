@@ -1,0 +1,105 @@
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#4A90E2','primaryTextColor':'#fff','primaryBorderColor':'#2E5C8A','lineColor':'#6c757d','secondaryColor':'#50C878','tertiaryColor':'#F5A623','noteBkgColor':'#FFF8DC','noteTextColor':'#333','fontSize':'14px'}}}%%
+
+graph TB
+    subgraph frontend["<b>Frontend Layer</b><br/><i>Next.js + React + TypeScript</i>"]
+        UI[🖥️ Chat UI]
+        VR[🎙️ Voice Recorder]
+        SP[⚙️ Settings Panel]
+        WS[🔌 WebSocket Client]
+    end
+
+    subgraph backend["<b>Backend API Layer</b><br/><i>FastAPI + Python</i>"]
+        REST[📡 REST Endpoints]
+        WSH[🔄 WebSocket Handler]
+        TS[🎤 Transcription Service<br/><small>Whisper Local</small>]
+        SM[👥 Session Manager]
+    end
+
+    subgraph rag["<b>RAG Pipeline - Core Intelligence</b><br/><i>Hybrid Retrieval + Reranking</i>"]
+        QE[🔍 Query Enhancer]
+        HR[🔀 Hybrid Retrieval]
+        RR[🎯 Cross-Encoder Reranker]
+        CF[📋 Context Formatter]
+        MM[🧠 Memory Manager]
+        
+        subgraph retrieval["Hybrid Search"]
+            VS[📊 Vector Search<br/><small>Semantic</small>]
+            BM[📝 BM25 Search<br/><small>Keyword</small>]
+            FUSION[⚡ RRF Fusion]
+        end
+    end
+
+    subgraph storage["<b>Data Storage Layer</b><br/><i>Vector + Keyword Indices</i>"]
+        CHROMA[(🗄️ ChromaDB<br/>Vector Store<br/><small>384-dim embeddings</small>)]
+        BM25[(📚 BM25 Index<br/>Keyword Search)]
+    end
+
+    subgraph llm["<b>Language Model</b><br/><i>Local LLM Inference</i>"]
+        OLLAMA[🤖 Ollama<br/>Llama 3.1 8B<br/><small>100% Local</small>]
+    end
+
+    subgraph ingestion["<b>Data Ingestion Pipeline</b><br/><i>Offline Processing</i>"]
+        PDF[📄 PDF Documents] --> CHUNK[✂️ Chunking<br/><small>Recursive</small>]
+        CHUNK --> EMB[🔢 Embedding Service<br/><small>Sentence Transformers</small>]
+        EMB --> INGEST1[💾 Vector Store<br/>Ingestion]
+        EMB --> INGEST2[📇 BM25 Index<br/>Building]
+    end
+
+    %% Frontend to Backend
+    UI -.->|HTTP/WS| REST
+    VR -.->|Audio| REST
+    WS -.->|Stream| WSH
+    SP -.->|Config| REST
+
+    %% Backend to RAG
+    REST ==>|Query| QE
+    WSH ==>|Query| QE
+    TS -.->|Transcribed Text| QE
+
+    %% RAG Pipeline Flow
+    QE ==>|Enhanced Query| HR
+    HR ==> VS
+    HR ==> BM
+    VS --> FUSION
+    BM --> FUSION
+    FUSION ==>|Candidates| RR
+    RR ==>|Top Results| CF
+    CF ==>|Formatted Context| MM
+
+    %% RAG to Storage
+    VS <-.->|Semantic Search| CHROMA
+    BM <-.->|Keyword Search| BM25
+
+    %% RAG to LLM
+    MM ==>|Context + History| OLLAMA
+    OLLAMA ==>|Generated Response| WSH
+
+    %% Response back
+    WSH -.->|Streaming| WS
+    WSH -.->|Response| REST
+
+    %% Ingestion to Storage
+    INGEST1 -.->|Store Vectors| CHROMA
+    INGEST2 -.->|Build Index| BM25
+
+    %% Styling
+    classDef frontendClass fill:#E3F2FD,stroke:#4A90E2,stroke-width:3px,color:#000
+    classDef backendClass fill:#E8F5E9,stroke:#50C878,stroke-width:3px,color:#000
+    classDef ragClass fill:#FFF3E0,stroke:#F5A623,stroke-width:3px,color:#000
+    classDef storageClass fill:#F3E5F5,stroke:#9C27B0,stroke-width:3px,color:#000
+    classDef llmClass fill:#FFEBEE,stroke:#E74C3C,stroke-width:3px,color:#000
+    classDef ingestionClass fill:#ECEFF1,stroke:#607D8B,stroke-width:2px,color:#000
+
+    class UI,VR,SP,WS frontendClass
+    class REST,WSH,TS,SM backendClass
+    class QE,HR,RR,CF,MM,VS,BM,FUSION ragClass
+    class CHROMA,BM25 storageClass
+    class OLLAMA llmClass
+    class PDF,CHUNK,EMB,INGEST1,INGEST2 ingestionClass
+
+
+
+
+
+
+
